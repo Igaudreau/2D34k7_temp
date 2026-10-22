@@ -1,0 +1,50 @@
+! 2D WD Shell Detonation
+! artificial dissipation (currently at default value)
+avise 0.2
+avisp 0.2
+
+! refinement criteria
+rtol 5E-3       ! was 1E-4
+derefcrit 0.2
+refcrit 0.3
+remhole
+
+! Equations and solvers
+screen
+react mesa_34.net
+!msbdf
+rk2
+hll             ! kt god also available
+noviscous
+sootfoil
+diffbad 20
+
+! Initial pertubation
+amplitude 2e5
+period 2e-6
+!gslatol 1e-8
+!gslrtol 1e-4
+
+START "2D shell 34 iso k=1e-7"
+   LEVELS 6
+   XYZ 2
+      X 400 -1e6 1.99e8 SYMMETRIC-FREE
+      Y 2 0 1e6 SYMMETRIC
+      SCALARS 35 ADVECT 35      !iso13
+   CASE HECO_34ISO_K1E-7
+END
+
+curv 1e-7
+
+! Courant numbers for hydro solver (defaults)
+!cn 0.4
+!cnf 0.6
+! Courant numbers for source term in hydro solver
+!cns 1.0
+!cns 0.1
+!cns 1.0
+! cns1, cns2, solev control substeps etc in usrgsl.c (command user prints)
+!cns1 1e9
+!solev 1
+!cns1 1e-4
+!cns2 1e-4
